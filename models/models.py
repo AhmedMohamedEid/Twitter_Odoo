@@ -35,18 +35,27 @@ class TweetStatus(models.Model):
     def updatetweet(self):
         auth = OAuthHandler(self.twitter_account.api_key, self.twitter_account.api_secret_key)
         auth.set_access_token(self.twitter_account.access_token, self.twitter_account.access_token_secret)
-        t_api = tweepy.API(auth)
+        tw_api = tweepy.API(auth)
+
+        # public_tweets = tw_api.home_timeline()
+        # for tweet in public_tweets:
+        #     print tweet.text
+        #
+        # user = tw_api.get_user('eng_ahmed_m_eid')
+        # print user.screen_name
+        # print user.followers_count
+        # for friend in user.friends():
+        #     print friend.screen_name
 
         self.ensure_one()
-        #        sliced = self.twitter_uuid[:4]
-        sliced = str(random.random())[:4]
-        #        for status in tweepy.Cursor(t_api.user_timeline).items(10):i
-        status_update = (self.twt_update_status + " " + sliced)
-        try:
-            tweepy.Cursor(t_api.update_status(status=status_update))
-        except TweepError as e:
-            self.state = "publish"
-            raise ValidationError(_('Status updated successfully! Just ignore this {} error \n'.format(e)))
-        self.twt_update_status = tweepy.Cursor(t_api.update_status(status=status_update))
+        rand = str(random.random())[:4]
+        status_update = (self.twt_update_status+"Eng.A.E\n"+rand)
 
+        try:
+            tweepy.Cursor(tw_api.update_status(status=status_update))
+            self.state = "publish"
+            # raise ValidationError(_('Successfully Status Update'))
+        except tweepy.TweepError as e:
+            raise ValidationError(_('Just ignore this {} error \n'.format(e)))
+        # self.twt_update_status = tweepy.Cursor(tw_api.update_status(status=status_update))
         return

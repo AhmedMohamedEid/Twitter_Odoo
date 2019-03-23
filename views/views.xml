@@ -64,7 +64,7 @@
                           <field name="user_name"/>
                       </group>
                       <group string="Status">
-                          <field name="twt_update_status" widget="html" nolabel="1"/>
+                          <field name="twt_update_status"  nolabel="1"/>
                       </group>
                   </sheet>
               </form>
