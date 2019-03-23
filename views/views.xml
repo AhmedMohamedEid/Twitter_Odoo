@@ -1,0 +1,100 @@
+<odoo>
+  <data>
+
+      <record id="view_twt_config_form" model="ir.ui.view">
+          <field name="name">view.twt.config.form</field>
+          <field name="model">twt.config</field>
+          <field name="arch" type="xml">
+              <form string="Tweet App Config">
+                  <sheet>
+                      <group string="Application Access Data">
+                          <field name="name"/>
+                          <field name="api_key"/>
+                          <field name="api_secret_key"/>
+                          <field name="access_token"/>
+                          <field name="access_token_secret"/>
+                      </group>
+                  </sheet>
+              </form>
+          </field>
+      </record>
+
+      <record id="view_twt_config_tree" model="ir.ui.view">
+          <field name="name">view.twt.config.tree</field>
+          <field name="model">twt.config</field>
+          <field name="arch" type="xml">
+              <tree string="App Access Data">
+                  <field name="name"/>
+                  <field name="api_key"/>
+                  <field name="api_secret_key"/>
+                  <field name="access_token"/>
+                  <field name="access_token_secret"/>
+              </tree>
+          </field>
+      </record>
+
+      <record id="action_twt_config" model="ir.actions.act_window">
+          <field name="name">Application Access Data</field>
+          <field name="type">ir.actions.act_window</field>
+          <field name="res_model">twt.config</field>
+          <field name="view_mode">tree,form</field>
+      </record>
+
+
+      <menuitem id="menu_twt_test_root" name="Twitter"  sequence="2"/>
+
+      <menuitem id="menu_twt_config_categ" name="Configuration" parent="menu_twt_test_root" sequence="2"/>
+      <!-- This Menu Item must have a parent and an action -->
+      <menuitem id="menu_twt_config_action" name="Twt Access" parent="menu_twt_config_categ" action="action_twt_config" sequence="1"/>
+
+
+      <record id="view_twt_status_form" model="ir.ui.view">
+          <field name="name">view.twt.status.form</field>
+          <field name="model">twt.status</field>
+          <field name="arch" type="xml">
+              <form string="Twitter Status">
+                  <header>
+                      <button name="updatetweet" string="Publish" class="oe_highlight" states="draft" type="object"/>
+                      <field name="state" widget="statusbar" statusbar_visible="draft,publish" type="object" />
+                  </header>
+                  <sheet>
+                      <group>
+                          <field name="name"/>
+                          <field name="twitter_account"/>
+                          <field name="user_name"/>
+                      </group>
+                      <group string="Status">
+                          <field name="twt_update_status" widget="html" nolabel="1"/>
+                      </group>
+                  </sheet>
+              </form>
+          </field>
+      </record>
+
+      <record id="view_twt_status_tree" model="ir.ui.view">
+          <field name="name">view.twt.status.tree</field>
+          <field name="model">twt.status</field>
+          <field name="arch" type="xml">
+              <tree string="All Tweet Status">
+                  <field name="name"/>
+                  <field name="twitter_account"/>
+                  <field name="user_name"/>
+                  <field name="twt_update_status"/>
+              </tree>
+          </field>
+      </record>
+
+      <record id="action_twt_status" model="ir.actions.act_window">
+          <field name="name">All Tweet Status </field>
+          <field name="type">ir.actions.act_window</field>
+          <field name="res_model">twt.status</field>
+          <field name="view_mode">tree,form</field>
+      </record>
+
+      <!-- This Menu Item Must have a parent -->
+      <menuitem id="menu_twt_status_categ" name="Tweet Status" parent="menu_twt_test_root" sequence="1"/>
+      <!-- This Menu Item must have a parent and an action -->
+      <menuitem id="menu_twt_status_action" name="Status" parent="menu_twt_status_categ" action="action_twt_status" sequence="1"/>
+
+  </data>
+</odoo>
